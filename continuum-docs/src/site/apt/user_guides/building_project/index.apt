@@ -1,0 +1,71 @@
+ ------
+ Building Projects
+ ------
+ Emmanuel Venisse
+ ------
+ 2010-02-18
+ ------
+
+~~ Licensed to the Apache Software Foundation (ASF) under one
+~~ or more contributor license agreements.  See the NOTICE file
+~~ distributed with this work for additional information
+~~ regarding copyright ownership.  The ASF licenses this file
+~~ to you under the Apache License, Version 2.0 (the
+~~ "License"); you may not use this file except in compliance
+~~ with the License.  You may obtain a copy of the License at
+~~
+~~   http://www.apache.org/licenses/LICENSE-2.0
+~~
+~~ Unless required by applicable law or agreed to in writing,
+~~ software distributed under the License is distributed on an
+~~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+~~ KIND, either express or implied.  See the License for the
+~~ specific language governing permissions and limitations
+~~ under the License.
+
+Building Projects
+
+    For Ant and Maven builds the following system properties will be added via -D command line:
+
+      * <<<continuum.project.group.name>>>
+
+      * <<<continuum.project.lastBuild.state>>> : last build state int flag
+
+      * <<<continuum.project.lastBuild.number>>>
+
+      * <<<continuum.project.nextBuild.number>>>
+
+      * <<<continuum.project.id>>>
+
+      * <<<continuum.project.name>>>
+
+      * <<<continuum.project.version>>>
+
+      []
+
+    When building projects, the build order is determined by the inter-dependency of the projects.
+    This would mean that the dependencies of a project are built first.
+
+    In cases when a project group can build projects in parallel build queues but one of those projects depend
+    on another project, the inter-dependent projects will build in the same build queue.
+
+    Projects can be built in two ways:
+
+      [[1]] {{{./schedule_build.html} Scheduled Builds}}
+
+      [[2]] {{{./forced_build.html} Forced Builds}}
+
+      []
+
+    Projects will have the <<in queue>> icon once the forced build or a scheduled build is triggered. This means that the project is either in the <<prepare build
+    queue>> or in the <<build queue>>.
+
+[../../images/inqueue.gif]
+
+    Checkout or update of projects takes longer with distributed builds enabled because after an SCM checkout or SCM update, an SCM changelog follows to get the "latest
+    update date" needed to determine whether projects should build or not.
+
+* Cancelling builds
+
+    If a build has been started, you can cancel it before it completes. See
+    {{{./cancelling_build.html} Cancelling Builds}} for more information.
